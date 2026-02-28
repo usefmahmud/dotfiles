@@ -71,7 +71,7 @@
     "interval": 3,
     "format": "󰍛 {usage}%",
     "format-high": "󰍛 {usage}%",  
-    "on-click": "ghostty -e btop",
+    "on-click": "omarchy-launch-or-focus-tui btop",
     "states": { 
       "high": 70,
       "critical": 90
@@ -81,7 +81,7 @@
     "interval": 3,
     "format": "󰘚 {percentage}%",
     "tooltip-format": "{used:0.1f}GB / {total:0.1f}GB",
-    "on-click": "ghostty -e btop",
+    "on-click": "omarchy-launch-or-focus-tui btop",
     "states": { "high": 70, "critical": 90 }
   },
   "clock": {
