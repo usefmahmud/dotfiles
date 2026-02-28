@@ -1,0 +1,98 @@
+# If not running interactively, don't do anything (leave this at the top of this file)
+[[ $- != *i* ]] && return
+
+# All the default Omarchy aliases and functions
+# (don't mess with these directly, just overwrite them here!)
+source ~/.local/share/omarchy/default/bash/rc
+
+# Add your own exports, aliases, and functions here.
+#
+# Make an alias for invoking commands you use constantly
+# alias p='python'
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# pnpm
+export PNPM_HOME="/home/usefmahmud/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+export PATH="$HOME/develop/flutter/bin:$PATH"
+#
+# Installation:
+#
+# Via shell config file  ~/.bashrc  (or ~/.zshrc)
+#
+#   Append the contents to config file
+#   'source' the file in the config file
+#
+# You may also have a directory on your system that is configured
+#    for completion files, such as:
+#
+#    /usr/local/etc/bash_completion.d/
+
+###-begin-flutter-completion-###
+
+if type complete &>/dev/null; then
+  __flutter_completion() {
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           flutter completion -- "${COMP_WORDS[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -F __flutter_completion flutter
+elif type compdef &>/dev/null; then
+  __flutter_completion() {
+    si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 flutter completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef __flutter_completion flutter
+elif type compctl &>/dev/null; then
+  __flutter_completion() {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       flutter completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K __flutter_completion flutter
+fi
+
+###-end-flutter-completion-###
+
+
+export CHROME_EXECUTABLE=($which google-chrome-stable)
+
+## Generated 2025-11-29 13:58:05.893170Z
+## By /home/usefmahmud/develop/flutter/bin/cache/flutter_tools.snapshot
+
+# Added by flyctl installer
+export FLYCTL_INSTALL="/home/usefmahmud/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+. "/home/usefmahmud/.deno/env"
+
+# initializing starship theme
+eval "$(starship init bash)"
+
+# fix the problem of command hashing
+set -h
