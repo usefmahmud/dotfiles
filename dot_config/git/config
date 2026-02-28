@@ -14,7 +14,7 @@
   save = stash push -u -m
   pop = stash pop
   stashes = stash list  
-	aa = add
+	aa = add .
 [init]
 	defaultBranch = main
 [pull]
