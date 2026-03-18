@@ -96,3 +96,7 @@ eval "$(starship init bash)"
 
 # fix the problem of command hashing
 set -h
+export PATH="$HOME/.local/bin:$PATH"
+
+# opencode
+export PATH=/home/usefmahmud/.opencode/bin:$PATH
