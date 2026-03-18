@@ -1,6 +1,8 @@
 # See https://git-scm.com/docs/git-config
 
 [alias]
+  cfg = config --list
+
 	co = checkout
   cob = checkout -b
 	br = branch
@@ -16,6 +18,8 @@
   pop = stash pop
   stashes = stash list  
 	aa = add .
+
+  uncommit = reset --soft HEAD^
 [init]
 	defaultBranch = main
 [pull]
