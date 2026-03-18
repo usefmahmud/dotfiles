@@ -8,6 +8,7 @@
   "modules-center": ["clock", "custom/update", "custom/voxtype", "custom/screenrecording-indicator"],
   "modules-right": [
     "group/tray-expander",
+    "hyprland/language",
     "bluetooth",
     "network",
     "pulseaudio",
@@ -177,5 +178,11 @@
   "tray": {
     "icon-size": 12,
     "spacing": 17
+  },
+  "hyprland/language": {
+    "format": " {}",
+    "format-ar": "AR",
+    "format-en": "EN",
+    "on-click": "hyprctl switchxkblayout all next"
   }
 }
